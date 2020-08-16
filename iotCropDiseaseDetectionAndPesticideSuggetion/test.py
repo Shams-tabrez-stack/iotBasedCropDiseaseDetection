@@ -1,11 +1,11 @@
 import requests
 import json
-import MySQLdb
+import pymysql
 import time
 import checkForDisease
 
 def agr():
-	db=MySQLdb.connect("localhost","root","root","IOT")
+	db=pymysql.connect("localhost","root","root","IOT")
 	cursor1 = db.cursor()
 	statement="CREATE TABLE IF NOT EXISTS agrdata(id INTEGER AUTO_INCREMENT PRIMARY KEY,colorR INTEGER,colorG INTEGER,colorB INTEGER, temperature INTEGER, humidity INTEGER);"
 	cursor1.execute(statement)
@@ -45,7 +45,7 @@ while True:
 	x=resp.text
 	final=x[x.find('['):-1]
 	lists=json.loads(final)
-	mydb = MySQLdb.connect("localhost","root","root","IOT")
+	mydb = pymysql.connect("localhost","root","root","IOT")
 	cursor = mydb.cursor()
 	cursor.execute(" CREATE TABLE IF NOT EXISTS data (id INTEGER AUTO_INCREMENT PRIMARY KEY,colorR INTEGER, colorG INTEGER, colorB INTEGER, temperature INTEGER, humidity INTEGER);")
 	for i in lists:
